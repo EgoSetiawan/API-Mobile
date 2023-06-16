@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Agrowisata",
+    "SitesId": [5]
+  },
+  {
+    "name": "Edukasi",
+    "SitesId": [3]
+  },
+  {
+    "name": "Gunung",
+    "SitesId": [6]
+  },
+  {
+    "name": "Kolam Renang",
+    "SitesId": [7]
+  },
+  {
+    "name": "Pantai",
+    "SitesId": [1, 2, 4]
+  }
+]

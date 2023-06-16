@@ -1,0 +1,18 @@
+[
+  {
+    "CategoryId": 5,
+    "SitesTouristId": 1
+  },
+  {
+    "CategoryId": 5,
+    "SitesTouristId": 2
+  },
+  {
+    "CategoryId": 2,
+    "SitesTouristId": 3
+  },
+  {
+    "CategoryId": 5,
+    "SitesTouristId": 4
+  }
+]

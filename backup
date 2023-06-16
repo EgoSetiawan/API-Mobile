@@ -1,0 +1,181 @@
+"use strict";
+const { Model } = require("sequelize");
+module.exports = (sequelize, DataTypes) => {
+  class SiteTourist extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // SiteTourist.hasMany(models.SiteTouristCategory, {
+      //   foreignKey: "SitesTouristId",
+      //   as: "SiteCategory",
+      // });
+      SiteTourist.belongsTo(models.Category, {
+        foreignKey: "categoryId",
+        as: "SiteCategory",
+      });
+    }
+  }
+  SiteTourist.init(
+    {
+      touristSitesId: DataTypes.INTEGER,
+      touristSitesName: DataTypes.STRING,
+      touristSitesDescription: DataTypes.TEXT,
+      photo_url: DataTypes.STRING,
+      categoryId: DataTypes.INTEGER,
+      lan: DataTypes.FLOAT,
+      lon: DataTypes.FLOAT,
+    },
+    {
+      sequelize,
+      modelName: "SiteTourist",
+    }
+  );
+  return SiteTourist;
+};
+// ==============
+("use strict");
+const { Model } = require("sequelize");
+module.exports = (sequelize, DataTypes) => {
+  class Category extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // Category.hasMany(models.SiteTouristCategory, {
+      //   foreignKey: "CategoryId",
+      //   as: "SiteCategory",
+      // });
+      Category.hasMany(models.Category, {
+        foreignKey: "CategoryId",
+        as: "SiteCategory",
+      });
+    }
+  }
+  Category.init(
+    {
+      nameCategory: DataTypes.STRING,
+    },
+    {
+      sequelize,
+      modelName: "Category",
+    }
+  );
+  return Category;
+};
+// ====================
+("use strict");
+const { Model } = require("sequelize");
+module.exports = (sequelize, DataTypes) => {
+  class SiteTouristCategory extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // SiteTouristCategory.belongsTo(models.SiteTourist, {
+      //   foreignKey: "SitesTouristId",
+      //   as: "tourisSite",
+      // });
+      // SiteTouristCategory.belongsTo(models.Category, {
+      //   foreignKey: "CategoryId",
+      //   as: "Category",
+      // });
+    }
+  }
+  SiteTouristCategory.init(
+    {
+      CategoryId: DataTypes.INTEGER,
+      SitesTouristId: DataTypes.INTEGER,
+    },
+    {
+      sequelize,
+      modelName: "SiteTouristCategory",
+    }
+  );
+  return SiteTouristCategory;
+};
+// ======================
+("use strict");
+const { Model } = require("sequelize");
+module.exports = (sequelize, DataTypes) => {
+  class Category extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // Category.hasMany(models.SiteTouristCategory, {
+      //   foreignKey: "CategoryId",
+      //   as: "SiteCategory",
+      // });
+      Category.hasMany(models.Category, {
+        foreignKey: "CategoryId",
+        as: "CategorySite",
+      });
+      Category.belongsTo(models.Category, {
+        foreignKey: "IdSites",
+        as: "SiteCategory",
+      });
+    }
+  }
+  Category.init(
+    {
+      nameCategory: DataTypes.STRING,
+      IdSites: DataTypes.INTEGER,
+    },
+    {
+      sequelize,
+      modelName: "Category",
+    }
+  );
+  return Category;
+};
+// =============
+("use strict");
+const { Model } = require("sequelize");
+module.exports = (sequelize, DataTypes) => {
+  class SiteTourist extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // SiteTourist.hasMany(models.SiteTouristCategory, {
+      //   foreignKey: "SitesTouristId",
+      //   as: "SiteCategory",
+      // });
+      SiteTourist.belongsTo(models.Category, {
+        foreignKey: "categoryId",
+        as: "CategorySite",
+      });
+      SiteTourist.hasOne(models.Category, {
+        foreignKey: "IdSites",
+        as: "SiteCategory",
+      });
+    }
+  }
+  SiteTourist.init(
+    {
+      touristSitesId: DataTypes.INTEGER,
+      touristSitesName: DataTypes.STRING,
+      touristSitesDescription: DataTypes.TEXT,
+      photo_url: DataTypes.STRING,
+      categoryId: DataTypes.INTEGER,
+      lan: DataTypes.FLOAT,
+      lon: DataTypes.FLOAT,
+    },
+    {
+      sequelize,
+      modelName: "SiteTourist",
+    }
+  );
+  return SiteTourist;
+};
