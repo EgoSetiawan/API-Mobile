@@ -179,3 +179,5 @@ module.exports = (sequelize, DataTypes) => {
   );
   return SiteTourist;
 };
+// ==============================
+postgres://mobile-api-main-db-0af05357bcb161583:6cFC3hKFgWqWpS412AVfa3APGsJBrg@user-prod-us-east-2-1.cluster-cfi5vnucvv3w.us-east-2.rds.amazonaws.com:5432/mobile-api-main-db-0af05357bcb161583

@@ -6,7 +6,12 @@ const storage = require("../services/multer");
 const upload = multer({
   storage,
   fileFilter: (req, file, cb) => {
-    if (file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
+    // const fileSize = parseInt(req.headers["content-length"]);
+    if (
+      file.mimetype === "image/jpeg" ||
+      file.mimetype === "image/png" ||
+      file.mimetype === "image/jpeg"
+    ) {
       cb(null, true);
     } else {
       cb(
@@ -22,6 +27,8 @@ const upload = multer({
 
 router.get("/getId/:id", userController.getDataById);
 
-router.put("/update", upload.single("profile"), userController.UpdateUser);
+router.delete("/delete/:id", userController.DestroyUser);
+
+router.put("/update/:id", upload.single("profile"), userController.UpdateUsers);
 
 module.exports = router;

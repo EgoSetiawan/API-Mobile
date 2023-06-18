@@ -3,6 +3,7 @@ const {
   createUser,
   getDataUser,
   updateUser,
+  getDestroy,
 } = require("../services/user.service");
 const fs = require("fs");
 const cloudinary = require("../helper/cloudinary.helper");
@@ -70,20 +71,37 @@ class UserControll {
   }
   static async getDataById(req, res, next) {
     try {
-      const getUserProfile = await getDataUser({ id: req.params.id });
-      responseFormatter.successLogin(res, true, 200, getUserProfile);
+      const getUserProfile = await getUserBy({ id: req.params.id });
+      responseFormatter.successLogin(
+        res,
+        true,
+        200,
+        "Get Data Id",
+        getUserProfile
+      );
     } catch (error) {
       next(error);
     }
   }
-  static async UpdateUser(req, res, next) {
+  static async DestroyUser(req, res, next) {
+    try {
+      const DestroysUser = await getDestroy({ id: req.params.id });
+      responseFormatter.successLogin(res, true, 200, "Delete account", {
+        DestroysUser,
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+  static async UpdateUsers(req, res, next) {
     try {
       if (req.file) {
         const public_id = `profile/${req.file.filename}`;
         const cdn = await cloudinary.uploader.upload(req.file.path, {
           public_id,
         });
-        req.body.profile_picture = cdn.secure_url;
+        req.body.profile = cdn.secure_url;
+        console.log(req.body.profile);
         fs.unlinkSync(req.file.path);
       }
       const result = await updateUser(
@@ -92,9 +110,10 @@ class UserControll {
           profile: req.body.profile,
         },
         {
-          id: req.param.id,
+          id: req.params.id,
         }
       );
+      console.log(result);
       responseFormatter.successLogin(res, true, 200, "User Updated");
     } catch (error) {
       next(error);
