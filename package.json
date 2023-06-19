@@ -7,7 +7,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "refresh": "sequelize db:migrate:undo:all && sequelize db:migrate && sequelize db:seed:all"
+    "refresh": "sequelize db:migrate:undo:all && sequelize db:migrate && sequelize db:seed:all",
+    "migrate": "sequelize sequelize db:migrate && sequelize db:seed:all",
+    "create": "sequelize sequelize db:create",
+    "drop": "sequelize sequelize db:drop"
   },
   "author": "",
   "license": "ISC",
